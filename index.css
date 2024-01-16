@@ -7,24 +7,27 @@ body, html {
 #parent {
     display: flex;
     height: 500px;
+    flex-direction: row;
 }
 
 #child1 {
     background-color: red;
     height: 500px;
+    /*ratio with respect to other items*/
     flex-grow: 1;
 }
 
 #child2 {
     background-color: green;
     height: 500px;
+    /*ratio with respect to other items*/
     flex-grow: 1;
 
 }
 
 #child3 {
-
     background-color: orange;
     height: 500px;
+    /*ratio with respect to other items*/
     flex-grow: 1;
 }
