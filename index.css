@@ -1,0 +1,30 @@
+
+body, html {
+    height: 100%;
+    width: 100%;
+}
+
+#parent {
+    display: flex;
+    height: 500px;
+}
+
+#child1 {
+    background-color: red;
+    height: 500px;
+    flex-grow: 1;
+}
+
+#child2 {
+    background-color: green;
+    height: 500px;
+    flex-grow: 1;
+
+}
+
+#child3 {
+
+    background-color: orange;
+    height: 500px;
+    flex-grow: 1;
+}
