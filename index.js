@@ -68,9 +68,9 @@ Your components will be checked for usage of deprecated APIs. */}
 
 
 
-// How is script loaded ? 
+// // How is script loaded ? 
 
-<script src="./script.js"></script>
+// <script src="./script.js"></script>
 
 // As soon as the script tag is encountered the HTML doc parsing and building dom stops and script is downloaded and executed then the rest of the HTML is read. 
 
@@ -107,3 +107,133 @@ Your components will be checked for usage of deprecated APIs. */}
 // Defer first one is always ran first then second 
 {/* <script async src="https://javascript.info/article/script-async-defer/long.js"></script>
 <script async src="https://javascript.info/article/script-async-defer/small.js"></script> */}
+
+// console.log(a) // reference error
+
+// let a = 5;
+
+// console.log(a) // 5
+
+
+// console.log(b) // undefined
+
+// var b = 5;
+
+// console.log(b) // 5
+
+
+
+// console.log(i) // reference error  
+// for(let j=0;j<=0;j++){
+//     console.log(i)  //reference error   
+//     let i =5;
+// }
+// console.log(i) // reference error 
+
+// console.log(i) // undefined  
+// for(let j=0;j<=0;j++){
+//     console.log(i) //undefined 
+//     var i =5;
+// }
+// console.log(i) // 5
+
+
+
+
+// Promise all polyfill
+// Promise.all(iterable)
+
+// Already fulfilled, if the iterable passed is empty.
+// Asynchronously fulfilled, when all the promises in the given iterable fulfill. The fulfillment value is an array of fulfillment values, in the order of the promises passed, regardless of completion order. If the iterable passed is non-empty but contains no pending promises, the returned promise is still asynchronously (instead of synchronously) fulfilled.
+// Asynchronously rejected, when any of the promises in the given iterable rejects. The rejection reason is the rejection reason of the first promise that was rejected.
+// Promise.all waits for all fulfillments (or the first rejection).
+
+// should return a single promise
+// If the passed argument is empty, it returns a Promise that is already resolved.
+// If the passed iterable contains no promises, it returns a Promise that is resolved asynchronously.
+// Rejection: If any of the passed promises are rejected, then this method rejects the value of that promise, whether or not the other promises have been resolved. 
+
+
+Promise.customAll = (iterables) => {
+    const promise = new Promise((resolve, reject)=> {
+        const res = [];
+        for(let i=0; i<iterables.length; i++){
+            Promise.resolve(iterables[i]).then(
+                (value) => {
+                    res.push(value);
+                    if(i === (iterables.length -1)){
+                        resolve(res);
+                    }
+                }
+            ).catch((err)=>{
+                reject(err);
+            }); 
+        }
+    });
+    return promise;
+}
+
+const prom1 = new Promise(function (resolve, reject) { 
+    setTimeout(() => { 
+        resolve("gfg1") 
+    }, 1000) 
+}) 
+  
+const prom2 = new Promise(function (resolve, reject) { 
+    setTimeout(() => { 
+        reject("error") 
+    }, 2000) 
+}) 
+  
+const prom3 = new Promise(function (resolve, reject) { 
+    setTimeout(() => { 
+        resolve("gfg2") 
+    }, 3000) 
+})
+
+const prom4 = new Promise(function (resolve, reject) { 
+    setTimeout(() => { 
+        resolve("gfg3") 
+    }, 3000) 
+}) 
+
+Promise.customAll([ 
+    prom1, 
+    prom2, 
+    prom3 
+]) 
+    .then((res) => { 
+        console.log(res); 
+    }) 
+    .catch((er) => { 
+        console.log(er) 
+    })
+
+
+Promise.customAll([ 
+    prom1, 
+    prom3, 
+    prom4
+]) 
+    .then((res) => { 
+        console.log(res); 
+    }) 
+    .catch((er) => { 
+        console.log(er) 
+    })
+
+
+
+
+
+
+
+
+
+// async await 
+// The async function declaration creates a binding of a new async function to a given name. The await keyword is permitted within the function body, enabling asynchronous, promise-based behavior to be written in a cleaner style and avoiding the need to explicitly configure promise chains.
+
+// Use of async and await enables the use of ordinary try / catch blocks around asynchronous code.
+
+
+// Promises
